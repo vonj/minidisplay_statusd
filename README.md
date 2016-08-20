@@ -10,3 +10,7 @@ https://github.com/hallard/ArduiPi_OLED
 http://hallard.me/adafruit-oled-display-driver-for-pi/
 
 
+Just in case, I forked the library here:
+https://github.com/vonj/ArduiPi_OLED
+
+
