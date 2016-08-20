@@ -1,5 +1,5 @@
 # minidisplay_statusd
-Tiny daemon to display current mail server status on a $5 OLED screen
+Tiny daemon to display current mail server status on a $5 I2C OLED screen off ebay.
 
 
 Note - this daemon requires the ArduiPi_OLED library, it
