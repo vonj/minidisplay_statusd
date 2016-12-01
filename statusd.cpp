@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #include "ArduiPi_OLED_lib.h"
 #include "Adafruit_GFX.h"
@@ -89,8 +91,19 @@ static bool read_internet_status()
 
 static int read_mails_received()
 {
+    const char* filename = "/var/tmp/mails_received.txt";
     int mails_received = 0;
-    FILE* fp = fopen("/var/tmp/mails_received.txt", "r");
+    struct stat buf;
+
+    if (stat(filename, &buf)) {
+        return -1;
+    }
+
+    if ((time(NULL) - buf.st_mtim.tv_sec) > (24*3600)) {
+        return -1; // Status file is unreasonably old
+    }
+
+    FILE* fp = fopen(filename, "r");
     if (!fp) {
         return -1;
     }
