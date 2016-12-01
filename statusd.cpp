@@ -140,8 +140,8 @@ static void show_status()
 
     display.setTextSize(1);
 
-    // Only do expensive stuff once a minute
-    if ((-99 == mails_received) || (0 == tp.tv_sec)) {
+    // Only do expensive stuff at startup, then once a minute
+    if ((-99 == mails_received) || (0 == (tp.tv_sec % 60))) {
         internet_up = read_internet_status();
         mails_received = read_mails_received();
     }
