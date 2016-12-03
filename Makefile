@@ -43,9 +43,9 @@ clean:
 
 install: all
 	test -d $(prefix) || mkdir $(prefix)
-	test -d $(prefix)/bin || mkdir $(prefix)/bin
+	test -d $(prefix)/sbin || mkdir $(prefix)/sbin
 	for prog in $(PROGRAMS); do \
-	  install -m 0755 $$prog $(prefix)/bin; \
+	  install -m 0755 $$prog $(prefix)/sbin; \
 	done
 
 .PHONY: install
