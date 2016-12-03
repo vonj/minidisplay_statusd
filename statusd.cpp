@@ -118,6 +118,7 @@ static int read_mails_received()
 static void show_status()
 {
     time_t now;
+    static time_t last_time;
     struct tm * timeinfo;
     double percent = 0;
     struct timespec tp;
@@ -153,8 +154,9 @@ static void show_status()
 
     display.setTextSize(1);
 
-    // Only do expensive stuff at startup, then once a minute
-    if ((-99 == mails_received) || (0 == (tp.tv_sec % 60))) {
+    // Only do "expensive" stuff every minute
+    if ((now - last_time) > 60) {
+        last_time = now;
         internet_up = read_internet_status();
         mails_received = read_mails_received();
     }
